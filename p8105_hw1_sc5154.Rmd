@@ -13,3 +13,76 @@ library(tidyverse)
 ```
 
 ## Problem 1
+
+Install the package `palmerpenguins` containing the `penguins` dataset. (This code is not  shown or executed in RMarkdown file)
+
+Load the `penguins` dataset.
+```{r cars}
+data("penguins", package = "palmerpenguins")
+```
+
+Then I'm going to write a short description of the `penguins` dataset.
+
+Let's first take a look at part of data in dataset.
+```{r}
+head(penguins, 10)
+tail(penguins, 10)
+```
+
+And the whole dataset:
+```{r}
+penguins
+```
+
+From the data displayed above, we can see that `penguins` dataset is describing features of a group of penguins. It has 8 columns, each represents a feature variable of penguins. The variables include `species`, `flipper_length_mm`,`sex` and `year` etc. 
+
+Here's a detailed summary of statistics for all data in the dataset.
+```{r}
+skimr::skim(penguins)
+```
+
+Or a brief version of summary towards the 8 variables in dataset:
+```{r}
+summary(penguins)
+```
+
+Next I'll display the size of the dataset.
+
+The row number of the dataset is:
+```{r}
+nrow(penguins)
+```
+
+The column number of the dataset is:
+```{r}
+ncol(penguins)
+
+```
+
+Then I'll calculate the mean flipper_length:
+```{r}
+mean(penguins$flipper_length_mm)
+```
+
+The result of mean is "NA", which indicates there may be missing values in the dataset. 
+
+But we can still calculate the mean of the rest values ignoring the values that are not available:
+```{r}
+mean(penguins$flipper_length_mm, na.rm = TRUE)
+```
+
+Last I'll make a scatterplot of `flipper_length_mm(y)` vs `bill_length_mm(x)`, and color points using the `species` variable.
+```{r}
+plot_df = tibble(
+  x = penguins$bill_length_mm,
+  y = penguins$flipper_length_mm
+)
+
+scatterplot1 = ggplot(plot_df, aes(x = x, y = y, color = penguins$species)) + geom_point()
+print(scatterplot1)
+```
+
+And I save this scatterplot to my project directly using `ggsave`.
+```{r}
+ggsave("scatterplot1.png", scatterplot1)
+```
