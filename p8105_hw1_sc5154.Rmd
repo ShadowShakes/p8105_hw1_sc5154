@@ -1,0 +1,15 @@
+---
+title: "p8105_hw1_sc5154"
+author: "Shaohan Chen"
+date: "2022-09-21"
+output: github_document
+---
+
+This document is my solution to Homework1 of P8105 Data Science.
+
+Load necessary packages.
+```{r}
+library(tidyverse)
+```
+
+## Problem 1
