@@ -86,3 +86,36 @@ And I save this scatterplot to my project directly using `ggsave`.
 ```{r}
 ggsave("scatterplot1.png", scatterplot1)
 ```
+
+## Problem 2
+
+Let's create a data frame comprised of the required variable types.
+```{r}
+data_vt = tibble(
+  x_1 = rnorm(10, mean = 0, sd = 1),
+  x_2 = x_1 > 0,
+  x_3 = c('a','b','c','d','e','f','g','h','i','j'),
+  x_4 = factor(c('a','a','a','a','b','b','b','b','c','c'),
+        levels = c('a','b','c'))
+)
+```
+
+Next I'll try to take the mean of each variable in dataframe using the `pull` function.
+```{r}
+mean(pull(data_vt, var = 1))
+mean(pull(data_vt, var = 2))
+mean(pull(data_vt, var = 3))
+mean(pull(data_vt, var = 4))
+```
+
+As shown on the output above, the mean works on random sample and logical vector (x_1 and x_2), but not on character vector or factor vector(x_3 and x_4).
+
+Finally, I'll apply the `as.numeric` function to the logical, character, and factor variables (But hide the output).
+```{r, results = "hide"}
+as.numeric(pull(data_vt, var = 2))
+as.numeric(pull(data_vt, var = 3))
+as.numeric(pull(data_vt, var = 4))
+
+```
+
+It seems that `as.numeric` works on the logical and factor variables(x_2 and x_4), but not on character variable(x_3). 
