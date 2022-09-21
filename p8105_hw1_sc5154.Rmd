@@ -25,13 +25,8 @@ Then I'm going to write a short description of the `penguins` dataset.
 
 Let's first take a look at part of data in dataset.
 ```{r}
-head(penguins, 10)
-tail(penguins, 10)
-```
-
-And the whole dataset:
-```{r}
-penguins
+head(penguins, 5)
+tail(penguins, 5)
 ```
 
 From the data displayed above, we can see that `penguins` dataset is describing features of a group of penguins. It has 8 columns, each represents a feature variable of penguins. The variables include `species`, `flipper_length_mm`,`sex` and `year` etc. 
@@ -118,4 +113,13 @@ as.numeric(pull(data_vt, var = 4))
 
 ```
 
-It seems that `as.numeric` works on the logical and factor variables(x_2 and x_4), but not on character variable(x_3). 
+It seems that `as.numeric` works on the logical and factor variables(x_2 and x_4), but not on character variable(x_3).
+
+That indicates me that Rstudio consider logical variable as `1` or `0` in numeric calculation, so I can take the mean of the logical vector. 
+
+Meanwhile, Rstudio can modify the format of logical variable into `0` and `1`, and also change factor vector as a numeric vector, but cannot change character vector into numeric vector. And when Rstudio cannot transform the format of characer vector, it just fill the vector with `NA`.
+
+That's why `as.numeric` works on the logical and factor variables(x_2 and x_4), but not on character variable(x_3). And if we want to calculate with factor vector, we have to manually transform it into numeric vector.
+
+
+That's all for Homework1. Thank you for your time!
